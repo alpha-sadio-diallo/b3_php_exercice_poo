@@ -11,7 +11,7 @@ class Person
 {
     
 
-    public function __construct(protected string $firstName, protected string $lastName)
+    public function __construct(protected string $firstName, protected string $lastName, protected int $age)
     {
 
     }
@@ -23,7 +23,39 @@ class Person
     public function setAge(int $age): void { $this->age = $age; }
 }
 
-$person = new Person("Alice", "Martin");
+$person = new Person("Alice", "Martin", 30);
 echo $person->getFirstName() . " " . $person->getLastName() . "<br>";
 
+class Student extends Person
+{
+    public function __construct(
+        string $firstName,
+        string $lastName,
+        int $age,
+        protected string $studentNumber,
+        protected string $school,
+        protected string $class
+    ) {
+        parent::__construct($firstName, $lastName, $age);
+    }
+
+    public function getStudentNumber(): string { return $this->studentNumber; }
+    public function setStudentNumber(string $studentNumber): void { $this->studentNumber = $studentNumber; }
+    public function getSchool(): string { return $this->school; }
+    public function setSchool(string $school): void { $this->school = $school; }
+    public function getClass(): string { return $this->class; }
+    public function setClass(string $class): void { $this->class = $class; }
+
+    public function displayStudent() {
+        echo "First Name: " . $this->getFirstName() . "<br>";
+        echo "Last Name: " . $this->getLastName() . "<br>";
+        echo "Age: " . $this->getAge() . "<br>";
+        echo "Student Number: " . $this->studentNumber . "<br>";
+        echo "School: " . $this->school . "<br>";
+        echo "Class: " . $this->class . "<br>";
+    }
+}
+
+$student = new Student("Bob", "Smith", 20, "S12345", "High School", "10th Grade");
+$student->displayStudent();
 
